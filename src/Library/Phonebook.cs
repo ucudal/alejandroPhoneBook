@@ -12,6 +12,11 @@ namespace Library
             this.persons = new List<Contact>();
         }
 
+        public void SendMessage(string text, Contact contact, IMessageChannel channel)
+        {
+            
+        }
+
         public Contact Owner { get; }
 
         public List<Contact> Search(string[] names)
