@@ -6,5 +6,9 @@ namespace Library
         {
             
         }
+        public Message GetMessage(Contact sender, Contact receiver)
+        {
+            return new Message(sender.Name, receiver.Name  );
+        }
     }
 }
