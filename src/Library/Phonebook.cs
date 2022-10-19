@@ -4,20 +4,34 @@ namespace Library
 {
     public class Phonebook
     {
-        private List<Contact> persons;
-
         public Phonebook(Contact owner)
         {
             this.Owner = owner;
             this.persons = new List<Contact>();
         }
+        public Contact Owner { get; }
+        private List<Contact> persons;
 
-        public void SendMessage(string text, Contact contact, IMessageChannel channel)
+        public void SendMessage(string text, string[] name, IMessageChannel channel)
         {
-            
+            foreach (Contact receiver in Search(name))
+            {
+                Message message= new Message(this.Owner.Name, receiver.Name);
+                message.Text= text;
+                channel.Send(message,receiver);
+            }
+        }
+        public void Add(string name)
+        {
+            Contact contact= new Contact(name);
+            this.persons.Add(contact);
         }
 
-        public Contact Owner { get; }
+        public void Remove(Contact contact)
+        {
+            this.persons.Remove(contact);
+        }
+
 
         public List<Contact> Search(string[] names)
         {
